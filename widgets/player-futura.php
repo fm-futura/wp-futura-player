@@ -20,8 +20,7 @@ class PlayerFutura_Widget extends WP_Widget {
     }
 }
 
-function wp_player_futura_register () {
+function wp_player_futura_widget_register () {
     register_widget('PlayerFutura_Widget');
 }
-add_action('widgets_init', 'wp_player_futura_register');
-
+add_action('widgets_init', 'wp_player_futura_widget_register');
