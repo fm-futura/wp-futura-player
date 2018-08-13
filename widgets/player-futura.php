@@ -12,7 +12,6 @@ class PlayerFutura_Widget extends WP_Widget {
         echo $args['before_widget'];
 
         $player_id = $this->id;
-        $player_base_url = plugins_url('', dirname(__FILE__));
 
         include(dirname(__FILE__) . '/../templates/player-futura-tpl.php');
 

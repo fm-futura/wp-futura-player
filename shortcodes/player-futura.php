@@ -1,7 +1,6 @@
 <?php
 
 function wp_player_futura_shortcode($atts) {
-      $player_base_url = plugins_url('', dirname(__FILE__));
       $player_id = uniqid('player_futura-');
 
       include(dirname(__FILE__) . '/../templates/player-futura-tpl.php');
