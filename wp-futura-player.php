@@ -26,3 +26,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 include_once('widgets/player-futura.php');
+
+function wp_player_futura_init()
+{
+    wp_enqueue_style('player_futura',   plugins_url('templates/player-futura.css', __FILE__));
+    wp_enqueue_script('player_futura',  plugins_url('templates/player-futura.js', __FILE__));
+
+}
+add_action('init', 'wp_player_futura_init');

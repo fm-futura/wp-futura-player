@@ -14,7 +14,7 @@ class PlayerFutura_Widget extends WP_Widget {
         $player_id = $this->id;
         $player_base_url = plugins_url('', dirname(__FILE__));
 
-        include('player-futura-tpl.php');
+        include(dirname(__FILE__) . '/../templates/player-futura-tpl.php');
 
         echo $args['after_widget'];
     }
@@ -25,10 +25,3 @@ function wp_player_futura_register () {
 }
 add_action('widgets_init', 'wp_player_futura_register');
 
-function wp_player_futura_init()
-{
-    wp_enqueue_style('player_futura',   plugins_url('widgets/player-futura.css', dirname(__FILE__)));
-    wp_enqueue_script('player_futura',  plugins_url('widgets/player-futura.js',  dirname(__FILE__)));
-
-}
-add_action('init', 'wp_player_futura_init');
