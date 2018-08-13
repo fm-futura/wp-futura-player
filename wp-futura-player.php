@@ -26,6 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 include_once('widgets/player-futura.php');
+include_once('shortcodes/player-futura.php');
 
 function wp_player_futura_init()
 {
