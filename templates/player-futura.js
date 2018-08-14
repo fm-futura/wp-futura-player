@@ -3,6 +3,9 @@ function FuturaPlayer(rootEl) {
   var playerContent = this.playerContent = rootEl.querySelector('.player__content');
   var playerControl = this.playerControl = rootEl.querySelector('.player__control');
   var currentShow   = this.currentShow   = rootEl.querySelector('.player__currentshow');
+
+  var currentShowProvider = this.currentShowProvider = new FuturaCurrentShow();
+
   var playerState = this.playerState = {
     playing: false,
     loading: false,
@@ -39,6 +42,23 @@ function FuturaPlayer(rootEl) {
     this.playerContent.classList.remove('loading');
     this.destroyAudio();
   }).bind(this);
+
+  eventHandlers.updateShow = (function () {
+    var showData = this.currentShowProvider.get();
+
+    var title = '';
+    if (showData) {
+      title = showData.title;
+    }
+    this.currentShow.textContent = title;
+    return title;
+  }).bind(this);
+
+  currentShowProvider.update().then(eventHandlers.updateShow);
+  setInterval(eventHandlers.updateShow, 60*1000);
+  setInterval(function() {
+    currentShowProvider.update();
+  }, 30*60*1000);
 }
 
 FuturaPlayer.prototype.play = function () {
