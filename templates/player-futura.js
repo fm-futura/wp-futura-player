@@ -113,3 +113,102 @@ FuturaPlayer.prototype.setupAudio = function () {
 
   audio.src = 'https://streamer.fmfutura.com.ar/vivo.mp3';
 }
+
+
+function FuturaCurrentShow() {
+  var state = this.state = {
+    schedule_url: 'https://fmfutura.com.ar/grilla-json',
+    last_update: null,
+    rawData: null,
+    showsByDay: [],
+  };
+
+  for (var day = 0; day < 7; day++) {
+    state.showsByDay[day] = [];
+  }
+
+  this.parseScheduleData = function (rawData) {
+    state.rawData = rawData;
+    showsByDay = state.showsByDay;
+
+    showsByDay.forEach(function(dayData) {
+      dayData.length = 0;
+    });
+
+    rawData.forEach(function (showData) {
+      var weekStart = moment().startOf('week');
+      var start = parseTime(showData.horario_inicio);
+      var end = parseTime(showData.horario_finalizacion);
+
+      if (end.hour === 0 && end.minutes === 0) {
+        end.hour = 23;
+        end.minutes = 59;
+      }
+
+      for (var idx=0; idx < showData.dia.length; idx++) {
+        var day = showData.dia[idx];
+        // maps 1 - 7 to 1 - 0
+        day = day % 7;
+
+        var dateStart = moment(weekStart).add(day, 'days').set(start);
+        var dateEnd   = moment(weekStart).add(day, 'days').set(end);
+
+        var show = {
+          start: dateStart,
+          end: dateEnd,
+          title: showData.title.rendered || showData.title,
+          url: showData.link,
+        };
+
+        showsByDay[day].push(show);
+      }
+    });
+
+    state.last_update = moment();
+
+    function parseTime (time) {
+      var parts = time.split(':');
+      return {
+        hour: parseInt(parts[0]),
+        minutes: parseInt(parts[1]),
+        seconds: 0,
+      };
+    }
+  }
+}
+
+FuturaCurrentShow.prototype.update = function () {
+  var self = this;
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', self.state.schedule_url);
+    xhr.addEventListener('error', function () {
+      reject(xhr.statusText);
+    });
+
+    xhr.addEventListener('load', function () {
+      var raw = JSON.parse(xhr.responseText);
+      self.parseScheduleData(raw);
+      resolve();
+    });
+
+    xhr.send();
+  });
+}
+
+FuturaCurrentShow.prototype.get = function getCurrentShow (when) {
+    when = moment(when);
+    var day = when.weekday();
+
+    var todayShows = this.state.showsByDay[day];
+
+    for (var idx=0; idx < todayShows.length; idx++) {
+      var show = todayShows[idx];
+      if (when.isBetween(show.start, show.end)) {
+        return show;
+      }
+    }
+
+    return null;
+}
