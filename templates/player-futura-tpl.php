@@ -10,7 +10,7 @@ $player_base_url = plugins_url('templates/', dirname(__FILE__));
         </div>
         <div class="player__pad"> </div>
         <div class="player__nowplaying">
-          <span class="player__currentshow"> El nombre de un programa muy largo </span>
+          <span class="player__currentshow">  </span>
         </div>
       </div>
     </div>
