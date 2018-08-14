@@ -30,8 +30,9 @@ include_once('shortcodes/player-futura.php');
 
 function wp_player_futura_init()
 {
-    wp_enqueue_style('player_futura',   plugins_url('templates/player-futura.css', __FILE__));
-    wp_enqueue_script('player_futura',  plugins_url('templates/player-futura.js', __FILE__));
+    wp_enqueue_style('player_futura',           plugins_url('templates/player-futura.css', __FILE__));
+    wp_enqueue_script('player_futura_momentjs', plugins_url('templates/moment.min.js', __FILE__));
+    wp_enqueue_script('player_futura',          plugins_url('templates/player-futura.js', __FILE__), array('player_futura_momentjs'));
 
 }
 add_action('init', 'wp_player_futura_init');
