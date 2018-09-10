@@ -61,9 +61,7 @@
 
   color: #f6ec80ff;
   font-size: 4vh;
-  font-family: monospace;
-  font-weight: bolder;
-  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
 }
 
 .player__currentshow {
