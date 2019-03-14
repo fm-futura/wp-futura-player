@@ -61,7 +61,8 @@
 
   color: #f6ec80ff;
   font-size: 4vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', arial, 'Roboto', sans-serif;
+  text-transform: uppercase;
 }
 
 .player__currentshow {
