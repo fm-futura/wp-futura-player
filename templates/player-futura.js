@@ -14,7 +14,7 @@ function FuturaPlayer(rootEl) {
   };
 
   var eventNames = this.eventNames = {
-    error: ['error', 'ended', 'suspend', 'offline', 'reset', 'cancel', 'close', 'abort', 'pause'],
+    error: ['error', 'ended', 'offline', 'reset', 'cancel', 'close', 'abort', 'pause'],
     play: ['playing'],
     loading: ['loadstart'],
   }
