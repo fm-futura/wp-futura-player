@@ -5,7 +5,6 @@
 }
 
 .player__container {
-  min-height: 5vh;
   height: 100%;
   display: flex;
   justify-content: flex-end;
@@ -45,17 +44,15 @@
 }
 
 .player__content img {
-  flex-grow: 1;
-  width: auto;
-  height: 5vh;
+  height: 100%;
 }
 
 .player__control {
-  min-height: 5vh;
   display: flex;
   flex-shrink: 0;
   flex-grow: 1;
   flex-direction: column;
+  flex-wrap: wrap;
   overflow: hidden;
   cursor: pointer;
 }
@@ -63,10 +60,11 @@
 .player__control > * {
   transition: margin-top .5s;
   transition: margin-bottom .5s;
-  display: flex;
 }
 
-.player__control > .player__pause, .player__play {
+.player__pause, .player__play {
+  min-height: 100%;
+  display: inline-flex;
 }
 
 .player__control > .player__pause {
@@ -87,7 +85,7 @@
   margin-bottom: -100%;
 }
 
-.player__content.loading .player__control {
+.player__content.loading .player__play {
   animation: loading 2s infinite linear;
 }
 
