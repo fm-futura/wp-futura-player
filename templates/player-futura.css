@@ -8,6 +8,7 @@
   height: 100%;
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap-reverse;
   background-color: white;
   color: #282828;
   font-family: 'Open Sans', arial, 'Roboto', sans-serif;
@@ -97,6 +98,7 @@
   align-items: center;
   overflow-x: hidden;
   overflow-y: hidden;
+  min-width: 8em;
 
   font-size: 4vh;
   text-transform: uppercase;
