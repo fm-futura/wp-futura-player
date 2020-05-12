@@ -112,8 +112,9 @@
 }
 
 @keyframes marquee {
-  0%   { margin-right: 0%;  }
-  100% { margin-right: 100%;}
+  0%   { margin-right: -100%; }
+  50%  { margin-right: 0%;    }
+  100% { margin-right: 100%;  }
 }
 
 @keyframes loading {
