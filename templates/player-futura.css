@@ -99,6 +99,7 @@
   overflow-x: hidden;
   overflow-y: hidden;
   min-width: 8em;
+  min-height: 4vh;
 
   font-size: 4vh;
   text-transform: uppercase;
