@@ -4,7 +4,7 @@ Plugin Name:        FM Futura Player
 Plugin URI:         https://github.com/fm-futura/wp-futura-player
 GitHub Plugin URI:  https://github.com/fm-futura/wp-futura-player
 Description:        Reproductor para nuestro streaming
-Version:            20180811
+Version:            20200514
 Author:             FM Futura
 Author URI:         https://fmfutura.com.ar
 License:            AGPL-3.0
