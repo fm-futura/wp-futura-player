@@ -9,16 +9,8 @@ $player_base_url = plugins_url('templates/', dirname(__FILE__));
         <span class="player__currentshow"> </span>
       </div>
 
-      <div>
-        <div class="player__branding__text">
-          Escuchá
-          <br />
-          <span class="brand__futura">
-            FUTURA
-          </span>
-          <br />
-          en VIVO
-        </div>
+      <div class="player__branding__text font-futura">
+        EN VIVO
       </div>
 
       <div class="player__content">
