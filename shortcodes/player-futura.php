@@ -1,7 +1,10 @@
 <?php
 
 function wp_player_futura_shortcode($atts) {
-    $player_id = uniqid('player_futura-');
+    static $player_idx = 0;
+
+    $player_id = 'player_futura-' . $player_idx;
+    $player_idx++;
 
     ob_start();
 
