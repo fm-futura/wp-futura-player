@@ -1,7 +1,7 @@
 <?php
 $player_base_url = plugins_url('templates/', dirname(__FILE__));
 ?>
-<div class="player__container" id="<?php echo $player_id ?>">
+<div data-turbolinks-permanent class="player__container" id="<?php echo $player_id ?>">
       <img src="<?php echo $player_base_url ?>vivo.svg"  class="player__branding" />
       <div class="player__content">
         <div class="player__control">
@@ -14,7 +14,7 @@ $player_base_url = plugins_url('templates/', dirname(__FILE__));
         </div>
       </div>
     </div>
-  <script type="text/javascript">
+  <script type="text/javascript" data-turbolinks-eval="false">
     var player = new FuturaPlayer(document.querySelector('#<?php echo $player_id?>'));
   </script>
 
