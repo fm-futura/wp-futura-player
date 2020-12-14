@@ -102,7 +102,18 @@
   text-transform: lowercase;
 }
 
+.player__nowplaying--inner {
+  width: 100%;
+  position: relative;
+}
+
+.player__nowplaying--inner::before {
+  content: '\00a0';
+}
+
 .player__currentshow {
+  min-width: 100%;
+  position: absolute;
   word-break: break-all;
   white-space: nowrap;
   vertical-align: middle;
@@ -110,9 +121,9 @@
 }
 
 @keyframes marquee {
-  0%   { margin-right: -100%; }
-  50%  { margin-right: 0%;    }
-  100% { margin-right: 100%;  }
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(0%);    }
+  100% { transform: translateX(100%);  }
 }
 
 @keyframes loading {

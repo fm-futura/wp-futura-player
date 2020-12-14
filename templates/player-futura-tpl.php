@@ -6,7 +6,9 @@ $player_base_url = plugins_url('templates/', dirname(__FILE__));
 <!--      <img src="<?php echo $player_base_url ?>vivo.svg"  class="player__branding" /> -->
 
       <div class="player__nowplaying">
-        <span class="player__currentshow"> </span>
+        <div class="player__nowplaying--inner">
+          <span class="player__currentshow"> </span>
+        </div>
       </div>
 
       <div class="player__branding__text font-futura">
