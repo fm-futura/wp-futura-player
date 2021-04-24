@@ -117,30 +117,36 @@ class FuturaPlayerRemote {
     let playerControl = rootEl.querySelector('.player__control');
     let currentShow   = rootEl.querySelector('.player__currentshow');
 
-    playerControl.addEventListener('click', () => this.sendCommand('toggle'));
+    if (playerControl) {
+      playerControl.addEventListener('click', () => this.sendCommand('toggle'));
+    }
 
-    window.addEventListener('futura-player::loading', (event) => {
-      playerContent.classList.remove('playing');
-      playerContent.classList.add('loading');
-    });
+    if (playerContent) {
+      window.addEventListener('futura-player::loading', (event) => {
+        playerContent.classList.remove('playing');
+        playerContent.classList.add('loading');
+      });
 
-    window.addEventListener('futura-player::play', (event) => {
-      playerContent.classList.add('playing');
-      playerContent.classList.remove('loading');
-    });
+      window.addEventListener('futura-player::play', (event) => {
+        playerContent.classList.add('playing');
+        playerContent.classList.remove('loading');
+      });
 
-    window.addEventListener('futura-player::stop', (event) => {
-      playerContent.classList.remove('playing');
-      playerContent.classList.remove('loading');
-    });
+      window.addEventListener('futura-player::stop', (event) => {
+        playerContent.classList.remove('playing');
+        playerContent.classList.remove('loading');
+      });
+    }
 
-    window.addEventListener('futura-player::show::update', (event) => {
-      let show = event.detail.show;
-      let title = show?.title || '';
-      currentShow.textContent = title;
-    });
+    if (currentShow) {
+      window.addEventListener('futura-player::show::update', (event) => {
+        let show = event.detail.show;
+        let title = show?.title || '';
+        currentShow.textContent = title;
+      });
 
-    this.sendCommand('get-current-show');
+      this.sendCommand('get-current-show');
+    }
   }
 
   sendCommand (command) {
