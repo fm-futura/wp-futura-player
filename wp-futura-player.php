@@ -32,7 +32,7 @@ function wp_player_futura_init()
 {
     wp_enqueue_style('player_futura',           plugins_url('templates/player-futura.css', __FILE__));
     wp_enqueue_script('player_futura_momentjs', plugins_url('templates/moment.min.js', __FILE__));
-    wp_enqueue_script('player_futura',          plugins_url('templates/player-futura.js', __FILE__), array('player_futura_momentjs'));
-
+    wp_enqueue_script('player_futura_schedule', plugins_url('templates/player-futura-schedule.js', __FILE__), array('player_futura_momentjs'));
+    wp_enqueue_script('player_futura_remote',   plugins_url('templates/player-futura-remote.js', __FILE__), array('player_futura_schedule'));
 }
 add_action('init', 'wp_player_futura_init');

@@ -25,7 +25,7 @@ $player_base_url = plugins_url('templates/', dirname(__FILE__));
   </div>
 
   <script type="text/javascript" data-turbolinks-eval="false" id="<?php echo $player_id ?>_script">
-    var player = new FuturaPlayer(document.querySelector('#<?php echo $player_id?>'));
+    var player = new FuturaPlayerRemote(document.querySelector('#<?php echo $player_id?>'));
   </script>
 
 <?php
