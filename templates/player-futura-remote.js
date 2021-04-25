@@ -1,13 +1,15 @@
 const DEFAULT_STREAM_URL = 'https://streamer.fmfutura.com.ar/vivo.mp3';
-
+const DEFAULT_WINDOW_TITLE = 'FM Futura';
 
 class FuturaPlayerHeadless {
-  constructor (streamUrl=DEFAULT_STREAM_URL) {
+  constructor (streamUrl=DEFAULT_STREAM_URL, defaultWindowTitle=DEFAULT_WINDOW_TITLE) {
     this.playerState = {
       streamUrl,
       playing: false,
       loading: false,
     };
+
+    this.defaultWindowTitle =  defaultWindowTitle;
     this.currentShow = {};
 
     let eventNames = {
@@ -31,6 +33,9 @@ class FuturaPlayerHeadless {
         this.playerState.playing = false;
         this.playerState.loading = false;
         this.dispatchPlayerUpdate('stop');
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.playbackState = 'paused';
+        }
       });
     });
 
@@ -45,12 +50,22 @@ class FuturaPlayerHeadless {
     audio.addEventListener('playing', () => {
       this.playerState.playing = true;
       this.playerState.loading = !audio.src;
+      this.setWindowTitle();
       this.dispatchPlayerUpdate('play');
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'playing';
+      }
     });
 
     window.addEventListener('futura-player::control::toggle', () => this.toggle());
     window.addEventListener('futura-player::control::play', () => this.play());
     window.addEventListener('futura-player::control::stop', () => this.stop());
+
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => this.play());
+        navigator.mediaSession.setActionHandler('pause', () => this.stop());
+        navigator.mediaSession.setActionHandler('stop', () => this.stop());
+    }
 
     setInterval(() => this.updateCurrentShow(), 60*1000);
     setInterval(() => this.updateSchedule(), 30*60*1000);
@@ -102,6 +117,19 @@ class FuturaPlayerHeadless {
   updateCurrentShow () {
     this.currentShow = this.currentShowProvider.get();
     this.dispatchShowUpdate();
+    this.setWindowTitle();
+  }
+
+  setWindowTitle () {
+    let title = this.currentShow?.title || this.defaultWindowTitle;
+
+    if (this.playerState.playing) {
+      document.title = title;
+    }
+
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({title});
+    }
   }
 
   async updateSchedule () {
