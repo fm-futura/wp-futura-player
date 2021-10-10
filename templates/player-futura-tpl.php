@@ -5,7 +5,7 @@ $player_base_url = plugins_url('templates/', dirname(__FILE__));
   <div data-turbolinks-permanent class="player__container" id="<?php echo $player_id ?>">
 <!--      <img src="<?php echo $player_base_url ?>vivo.svg"  class="player__branding" /> -->
 
-      <div class="player__nowplaying">
+      <div class="player__nowplaying font-bebas">
         <div class="player__nowplaying--inner">
           <span class="player__currentshow"> </span>
         </div>
