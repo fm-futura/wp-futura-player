@@ -42,6 +42,12 @@
   height: 100%;
 }
 
+.player__content.single-element {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: -1rem;
+}
+
 .player__pad {
   width: .5ex;
 }
