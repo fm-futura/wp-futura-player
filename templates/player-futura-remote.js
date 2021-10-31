@@ -7,6 +7,7 @@ class FuturaPlayerHeadless {
       streamUrl,
       playing: false,
       loading: false,
+      audioSrc: '',
     };
 
     this.defaultWindowTitle =  defaultWindowTitle;
@@ -41,15 +42,17 @@ class FuturaPlayerHeadless {
 
     audio.addEventListener('loadstart', () => {
       this.playerState.playing = false;
-      let loading = this.playerState.loading = !!audio.src;
+      let loading = this.playerState.loading = !!this.playerState.audioSrc;
       if (loading) {
         this.dispatchPlayerUpdate('loading');
+      } else {
+        this.dispatchPlayerUpdate('stop');
       }
     });
 
     audio.addEventListener('playing', () => {
       this.playerState.playing = true;
-      this.playerState.loading = !audio.src;
+      this.playerState.loading = !!audio.src;
       this.setWindowTitle();
       this.dispatchPlayerUpdate('play');
       if ('mediaSession' in navigator) {
@@ -73,8 +76,10 @@ class FuturaPlayerHeadless {
   }
 
   play () {
+    this.playerState.audioSrc = this.playerState.streamUrl;
     this.audio.src = this.playerState.streamUrl;
-    return this.audio.play();
+    return this.audio.play()
+      .catch(() => {});
   }
 
   pause () {
@@ -82,16 +87,17 @@ class FuturaPlayerHeadless {
   }
 
   stop  () {
+    this.playerState.audioSrc = '';
     this.audio.pause();
     this.audio.src = '';
+    this.playerState.loading = false;
+    this.dispatchPlayerUpdate('stop');
   }
 
   toggle () {
-    if (this.playerState.loading) {
-      return;
-    }
+    const { loading, playing } = this.playerState;
 
-    if (this.playerState.playing) {
+    if (playing || loading) {
       this.stop();
     } else {
       this.play();
