@@ -2,7 +2,7 @@
 $player_base_url = plugins_url('templates/', dirname(__FILE__));
 ?>
 
-  <div data-turbolinks-permanent class="player__container single-element" id="<?php echo $player_id ?>">
+  <div data-turbolinks="true" data-turbolinks-permanent class="player__container single-element" id="<?php echo $player_id ?>">
       <div class="player__nowplaying single-element font-bebas">
         <div class="player__nowplaying--inner">
           <span class="player__currentshow"> </span>
