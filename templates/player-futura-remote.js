@@ -185,4 +185,6 @@ class FuturaPlayerRemote {
   }
 }
 
-window.__futura_headless_player = new FuturaPlayerHeadless();
+if (!window.__futura_headless_player) {
+  window.__futura_headless_player = new FuturaPlayerHeadless();
+}
